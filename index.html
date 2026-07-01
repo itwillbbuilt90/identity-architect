@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Identity Architect Online — the structural mechanics of identity change.">
     <title>Identity Architect Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0f0f0f; 
-            --bg-secondary: #1a1a1a;
-            --text-primary: #d4d4d4; 
-            --text-secondary: #6b6b6b; 
-            --accent: #c9a84c; 
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #161616;
+            --bg-tertiary: #1c1c1c;
+            --text-primary: #d4d4d4;
+            --text-secondary: #8a8a8a;
+            --text-tertiary: #5c5c5c;
+            --paper: #e8e4da;
+            --accent: #c9a84c;
+            --accent-dim: #9c8339;
             --border-color: #2a2a2a;
-            --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --font-body: Georgia, 'Times New Roman', serif;
+            --border-color-strong: #3a3a3a;
+            --font-heading: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
         }
 
         * {
@@ -22,23 +31,27 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
             font-family: var(--font-body);
             line-height: 1.7;
-            border-radius: 0 !important; 
+            -webkit-font-smoothing: antialiased;
         }
 
         a {
             color: var(--text-primary);
             text-decoration: none;
             border-bottom: 1px solid var(--border-color);
-            transition: border-bottom 0.3s ease;
+            transition: border-color 0.3s ease, color 0.3s ease;
         }
 
         a:hover {
-            border-bottom: 1px solid var(--accent);
+            border-bottom-color: var(--accent);
         }
 
         .container {
@@ -51,68 +64,132 @@
         nav {
             display: flex;
             justify-content: space-between;
-            padding: 40px 0;
+            align-items: center;
+            padding: 36px 0;
             border-bottom: 1px solid var(--border-color);
             font-family: var(--font-heading);
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
         nav a {
             border-bottom: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
         nav a:hover {
             color: var(--accent);
         }
 
-        /* HERO SECTION - The Authorized Slice */
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
         .hero {
             position: relative;
-            padding: 180px 0 150px 0;
+            padding: 170px 0 140px 0;
             text-align: center;
             overflow: hidden;
             border-bottom: 1px solid var(--border-color);
         }
 
-        /* THE INFINITE FIELD BACKGROUND */
-        /* This creates the visual of a massive, chaotic grid fading into darkness */
         .hero::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.5;
-            /* The Aperture Mask: Fades the infinite field out, leaving a clear slice in the center */
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 22px 22px;
             -webkit-mask-image: radial-gradient(circle at center, transparent 0%, black 25%, black 40%, transparent 70%);
             mask-image: radial-gradient(circle at center, transparent 0%, black 25%, black 40%, transparent 70%);
             z-index: 1;
+            animation: field-breathe 9s ease-in-out infinite;
+        }
+
+        @keyframes field-breathe {
+            0%, 100% { opacity: 0.45; }
+            50% { opacity: 0.75; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero::before { animation: none; opacity: 0.6; }
+        }
+
+        /* ARCHITECTURAL REGISTRATION MARKS */
+        .reg-mark {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            z-index: 2;
+            opacity: 0.5;
+        }
+        .reg-mark::before, .reg-mark::after {
+            content: "";
+            position: absolute;
+            background: var(--text-tertiary);
+        }
+        .reg-mark::before { width: 16px; height: 1px; top: 7px; left: 0; }
+        .reg-mark::after { width: 1px; height: 16px; top: 0; left: 7px; }
+        .reg-mark.tl { top: 24px; left: 24px; }
+        .reg-mark.tr { top: 24px; right: 24px; }
+
+        .field-label {
+            position: absolute;
+            top: 30px;
+            right: 48px;
+            z-index: 2;
+            font-family: var(--font-heading);
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
         }
 
         .hero-content {
             position: relative;
-            z-index: 2; /* Keeps text above the background grid */
+            z-index: 3;
         }
 
-        /* THE EQUATION */
+        .eyebrow {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--paper);
+            opacity: 0.55;
+            margin-bottom: 28px;
+        }
+
         .equation {
             font-family: var(--font-heading);
-            font-size: 2.8rem;
+            font-size: 2.9rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 60px;
+            margin-bottom: 44px;
             color: var(--text-primary);
         }
 
-        /* Making the mechanics (x, ÷) feel like load-bearing operators */
         .operator {
-            color: var(--text-secondary);
-            font-weight: 300;
-            margin: 0 5px;
+            color: var(--text-tertiary);
+            font-weight: 400;
+            margin: 0 6px;
         }
 
         .variables {
@@ -129,25 +206,25 @@
 
         /* DIAGNOSTIC SECTION */
         .diagnostic {
-            padding: 80px 0;
+            padding: 76px 0;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
         }
 
         .diagnostic h2 {
             font-family: var(--font-heading);
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.16em;
             color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 400;
+            margin-bottom: 36px;
         }
 
         .friction-points {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 18px;
             flex-wrap: wrap;
         }
 
@@ -155,16 +232,19 @@
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 15px 25px;
+            padding: 15px 26px;
             font-family: var(--font-heading);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, background 0.25s ease;
         }
 
         .friction-btn:hover {
             border-color: var(--accent);
             color: var(--accent);
+            background: rgba(201, 168, 76, 0.06);
+            transform: translateY(-2px);
         }
 
         /* THE 3 DOORS */
@@ -175,18 +255,37 @@
         }
 
         .door {
-            padding: 80px 40px;
+            padding: 72px 40px 60px;
             border-right: 1px solid var(--border-color);
+            border-top: 2px solid transparent;
+            transition: border-top-color 0.3s ease, background 0.3s ease;
+            position: relative;
+        }
+
+        .door:hover {
+            border-top-color: var(--accent);
+            background: var(--bg-secondary);
         }
 
         .door:last-child {
             border-right: none;
         }
 
+        .door-number {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            color: var(--text-tertiary);
+            margin-bottom: 18px;
+        }
+
         .door h3 {
             font-family: var(--font-heading);
             font-size: 1.4rem;
-            margin-bottom: 20px;
+            font-weight: 600;
+            margin-bottom: 18px;
             letter-spacing: -0.01em;
             color: var(--text-primary);
         }
@@ -194,40 +293,69 @@
         .door p {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
             line-height: 1.8;
         }
 
         .door-link {
             font-family: var(--font-heading);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--accent);
-            border-bottom: 1px solid var(--accent);
+            border-bottom: 1px solid var(--accent-dim);
+            transition: border-color 0.25s ease;
+        }
+
+        .door-link:hover {
+            border-bottom-color: var(--accent);
         }
 
         /* FOOTER */
         footer {
-            padding: 40px 0;
+            padding: 36px 0;
             text-align: center;
-            color: var(--text-secondary);
+            color: var(--text-tertiary);
             font-size: 0.75rem;
             font-family: var(--font-heading);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
         }
 
         footer a {
-            color: var(--text-secondary);
+            color: var(--text-tertiary);
             margin: 0 15px;
+            border-bottom: none;
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .equation { font-size: 1.6rem; margin-bottom: 40px; }
+            .equation { font-size: 1.6rem; margin-bottom: 36px; }
+            .hero { padding: 130px 0 100px; }
             .hero-subtext { font-size: 1rem; }
+            .field-label { display: none; }
             .doors { grid-template-columns: 1fr; }
-            .door { border-right: none; border-bottom: 1px solid var(--border-color); padding: 60px 0; }
+            .door { border-right: none; border-bottom: 1px solid var(--border-color); padding: 56px 0; }
             .door:last-child { border-bottom: none; }
         }
     </style>
@@ -236,26 +364,28 @@
 
     <div class="container">
         <nav>
-            <a href="#">Blueprint</a>
-            <a href="#">Crucible</a>
-            <a href="#">Toolkit</a>
+            <a href="#blueprint">Blueprint</a>
+            <a href="#crucible">Crucible</a>
+            <a href="#toolkit">Toolkit</a>
         </nav>
 
         <section class="hero">
+            <span class="reg-mark tl" aria-hidden="true"></span>
+            <span class="reg-mark tr" aria-hidden="true"></span>
+            <span class="field-label" aria-hidden="true">Fig. 01 — Authorized Slice</span>
+
             <div class="hero-content">
-                <!-- The Exact Equation -->
+                <p class="eyebrow">Unified Field Theory of Identity</p>
                 <div class="equation">
                     <span class="variables">Identity</span> <span class="operator">=</span> (<span class="variables">Permissions</span> <span class="operator">×</span> <span class="variables">Constraints</span>) <span class="operator">÷</span> <span class="variables">Time</span>
                 </div>
-                
-                <!-- The Core Thesis -->
                 <p class="hero-subtext">
                     "You are not experiencing reality. You're experiencing the authorized slice of it that your current identity permits."
                 </p>
             </div>
         </section>
 
-        <section class="diagnostic">
+        <section class="diagnostic reveal">
             <h2>Where is the mechanism failing?</h2>
             <div class="friction-points">
                 <button class="friction-btn">My constraints are making me brittle.</button>
@@ -265,17 +395,20 @@
         </section>
 
         <section class="doors">
-            <div class="door">
+            <div class="door reveal" id="blueprint">
+                <span class="door-number">01</span>
                 <h3>The Blueprint</h3>
                 <p>The complete mechanical schematic. The equation, the five pillars, the difference between brittle, calibrated, and rigid constraints. The canon.</p>
                 <a href="#" class="door-link">Enter the Blueprint →</a>
             </div>
-            <div class="door">
+            <div class="door reveal" id="crucible">
+                <span class="door-number">02</span>
                 <h3>The Crucible</h3>
                 <p>Where theory meets real pressure. A comedian turning down $50M. A singer buying sovereignty with 'no'. Field reports of the mechanism in action.</p>
                 <a href="#" class="door-link">View the Crucible →</a>
             </div>
-            <div class="door">
+            <div class="door reveal" id="toolkit">
+                <span class="door-number">03</span>
                 <h3>The Toolkit</h3>
                 <p>The Identity Constraint Map. The instruments required to rewrite the authorized slice and negotiate with the deeper mind.</p>
                 <a href="#" class="door-link">Access the Toolkit →</a>
@@ -288,6 +421,19 @@
             <a href="#">About</a>
         </footer>
     </div>
+
+    <script>
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => observer.observe(el));
+    </script>
 
 </body>
 </html>
