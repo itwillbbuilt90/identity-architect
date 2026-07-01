@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Architect Online</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f; 
+            --bg-secondary: #1a1a1a;
+            --text-primary: #d4d4d4; 
+            --text-secondary: #6b6b6b; 
+            --accent: #c9a84c; 
+            --border-color: #2a2a2a;
+            --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-body: Georgia, 'Times New Roman', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            border-radius: 0 !important; 
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-bottom 0.3s ease;
+        }
+
+        a:hover {
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* NAVIGATION */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            border-bottom: none;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO SECTION - The Authorized Slice */
+        .hero {
+            position: relative;
+            padding: 180px 0 150px 0;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* THE INFINITE FIELD BACKGROUND */
+        /* This creates the visual of a massive, chaotic grid fading into darkness */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            /* The Aperture Mask: Fades the infinite field out, leaving a clear slice in the center */
+            -webkit-mask-image: radial-gradient(circle at center, transparent 0%, black 25%, black 40%, transparent 70%);
+            mask-image: radial-gradient(circle at center, transparent 0%, black 25%, black 40%, transparent 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Keeps text above the background grid */
+        }
+
+        /* THE EQUATION */
+        .equation {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 60px;
+            color: var(--text-primary);
+        }
+
+        /* Making the mechanics (x, ÷) feel like load-bearing operators */
+        .operator {
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin: 0 5px;
+        }
+
+        .variables {
+            color: var(--accent);
+        }
+
+        .hero-subtext {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            font-style: italic;
+        }
+
+        /* DIAGNOSTIC SECTION */
+        .diagnostic {
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .diagnostic h2 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .friction-points {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .friction-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 15px 25px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .friction-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* THE 3 DOORS */
+        .doors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .door {
+            padding: 80px 40px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .door:last-child {
+            border-right: none;
+        }
+
+        .door h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .door p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .door-link {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-family: var(--font-heading);
+            letter-spacing: 0.05em;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            margin: 0 15px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .equation { font-size: 1.6rem; margin-bottom: 40px; }
+            .hero-subtext { font-size: 1rem; }
+            .doors { grid-template-columns: 1fr; }
+            .door { border-right: none; border-bottom: 1px solid var(--border-color); padding: 60px 0; }
+            .door:last-child { border-bottom: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <a href="#">Blueprint</a>
+            <a href="#">Crucible</a>
+            <a href="#">Toolkit</a>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <!-- The Exact Equation -->
+                <div class="equation">
+                    <span class="variables">Identity</span> <span class="operator">=</span> (<span class="variables">Permissions</span> <span class="operator">×</span> <span class="variables">Constraints</span>) <span class="operator">÷</span> <span class="variables">Time</span>
+                </div>
+                
+                <!-- The Core Thesis -->
+                <p class="hero-subtext">
+                    "You are not experiencing reality. You're experiencing the authorized slice of it that your current identity permits."
+                </p>
+            </div>
+        </section>
+
+        <section class="diagnostic">
+            <h2>Where is the mechanism failing?</h2>
+            <div class="friction-points">
+                <button class="friction-btn">My constraints are making me brittle.</button>
+                <button class="friction-btn">My constraints are making me rigid.</button>
+                <button class="friction-btn">I'm negotiating with the wrong guardian.</button>
+            </div>
+        </section>
+
+        <section class="doors">
+            <div class="door">
+                <h3>The Blueprint</h3>
+                <p>The complete mechanical schematic. The equation, the five pillars, the difference between brittle, calibrated, and rigid constraints. The canon.</p>
+                <a href="#" class="door-link">Enter the Blueprint →</a>
+            </div>
+            <div class="door">
+                <h3>The Crucible</h3>
+                <p>Where theory meets real pressure. A comedian turning down $50M. A singer buying sovereignty with 'no'. Field reports of the mechanism in action.</p>
+                <a href="#" class="door-link">View the Crucible →</a>
+            </div>
+            <div class="door">
+                <h3>The Toolkit</h3>
+                <p>The Identity Constraint Map. The instruments required to rewrite the authorized slice and negotiate with the deeper mind.</p>
+                <a href="#" class="door-link">Access the Toolkit →</a>
+            </div>
+        </section>
+
+        <footer>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">About</a>
+        </footer>
+    </div>
+
+</body>
+</html>
