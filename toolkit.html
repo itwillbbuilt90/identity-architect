@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Toolkit | Identity Architect Online</title>
+    <meta name="description" content="The instruments required to rewrite the authorized slice and negotiate with the deeper mind.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #161616;
+            --bg-tertiary: #1c1c1c;
+            --text-primary: #d4d4d4;
+            --text-secondary: #8a8a8a;
+            --text-tertiary: #5c5c5c;
+            --paper: #e8e4da;
+            --accent: #c9a84c;
+            --accent-dim: #9c8339;
+            --border-color: #2a2a2a;
+            --border-color-strong: #3a3a3a;
+            --font-heading: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        a:hover { border-bottom-color: var(--accent); }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 36px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            border-bottom: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover { color: var(--accent); }
+        nav a:hover::after { width: 100%; }
+        nav a.active { color: var(--accent); }
+
+        .nav-doors { display: flex; gap: 40px; }
+
+        .page-header {
+            position: relative;
+            padding: 100px 0 80px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 22px 22px;
+            -webkit-mask-image: radial-gradient(circle at center, transparent 0%, black 25%, black 40%, transparent 70%);
+            mask-image: radial-gradient(circle at center, transparent 0%, black 25%, black 40%, transparent 70%);
+            z-index: 1;
+            animation: field-breathe 9s ease-in-out infinite;
+        }
+
+        @keyframes field-breathe {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-header::before { animation: none; opacity: 0.55; }
+        }
+
+        .reg-mark {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            z-index: 2;
+            opacity: 0.5;
+        }
+        .reg-mark::before, .reg-mark::after {
+            content: "";
+            position: absolute;
+            background: var(--text-tertiary);
+        }
+        .reg-mark::before { width: 16px; height: 1px; top: 7px; left: 0; }
+        .reg-mark::after { width: 1px; height: 16px; top: 0; left: 7px; }
+        .reg-mark.tl { top: 24px; left: 24px; }
+        .reg-mark.tr { top: 24px; right: 24px; }
+
+        .field-label {
+            position: absolute;
+            top: 30px;
+            right: 48px;
+            z-index: 2;
+            font-family: var(--font-heading);
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+
+        .header-content { position: relative; z-index: 3; }
+
+        .eyebrow {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-dim);
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 2.4rem;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .page-header p {
+            max-width: 560px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .instrument {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 60px 0;
+            text-align: center;
+            opacity: 0.6;
+        }
+
+        .instrument .tag {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-tertiary);
+            margin-bottom: 20px;
+        }
+
+        .instrument h2 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 18px;
+            max-width: 26ch;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .instrument p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 50ch;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .grid-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+            max-width: 420px;
+            margin: 40px auto 0;
+        }
+
+        .grid-cell {
+            background: var(--bg-secondary);
+            padding: 16px 8px;
+            font-family: var(--font-heading);
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+
+        .door-link {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent-dim);
+        }
+
+        .door-link:hover { border-bottom-color: var(--accent); }
+
+        footer {
+            padding: 36px 0;
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 0.75rem;
+            font-family: var(--font-heading);
+            letter-spacing: 0.06em;
+        }
+
+        footer a {
+            color: var(--text-tertiary);
+            margin: 0 15px;
+            border-bottom: none;
+        }
+
+        footer a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.7rem; }
+            .field-label { display: none; }
+            .nav-doors { gap: 20px; }
+            nav { flex-wrap: wrap; gap: 16px; }
+            .grid-preview { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <a href="index.html" style="border-bottom: none;">&larr; Home</a>
+            <span class="nav-doors">
+                <a href="index.html">Blueprint</a>
+                <a href="crucible.html">Crucible</a>
+                <a href="toolkit.html" class="active">Toolkit</a>
+            </span>
+        </nav>
+
+        <section class="page-header">
+            <span class="reg-mark tl" aria-hidden="true"></span>
+            <span class="reg-mark tr" aria-hidden="true"></span>
+            <span class="field-label" aria-hidden="true">Fig. 04 &mdash; Toolkit</span>
+
+            <div class="header-content">
+                <p class="eyebrow">03 &middot; The Toolkit</p>
+                <h1>The instruments</h1>
+                <p>What's required to rewrite the authorized slice and negotiate with the deeper mind.</p>
+            </div>
+        </section>
+
+        <section class="instrument">
+            <div class="tag">Available now</div>
+            <h2>The Identity Constraint Map</h2>
+            <p>Find out which of your five pillars is running brittle &mdash; and which one has gone rigid. Fifteen diagnostic entries across Judgment, Authority, Belonging, Meaning, and Eros.</p>
+            <div class="grid-preview" aria-hidden="true">
+                <div class="grid-cell">Judgment</div>
+                <div class="grid-cell">Authority</div>
+                <div class="grid-cell">Belonging</div>
+                <div class="grid-cell">Meaning</div>
+                <div class="grid-cell">Eros</div>
+                <div class="grid-cell">&mdash;</div>
+            </div>
+            <div style="margin-top: 36px;">
+                <a href="identity-constraint-map.pdf" class="door-link">Download the map &rarr;</a>
+            </div>
+        </section>
+
+        <footer>
+            <a href="index.html">Home</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </footer>
+    </div>
+
+</body>
+</html>
